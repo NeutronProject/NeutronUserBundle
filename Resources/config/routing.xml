@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    
+    <route id="neutron_user_management" pattern="/user-management">
+        <default key="_controller">NeutronUserBundle:Management:index</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+    <route id="neutron_user_management_add" pattern="/user-management/add">
+        <default key="_controller">NeutronUserBundle:Management:add</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+    <route id="neutron_user_management_edit" pattern="/user-management/edit/{rowId}">
+        <default key="_controller">NeutronUserBundle:Management:edit</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+    <route id="neutron_user_management_delete" pattern="/user-management/delete/{rowId}">
+        <default key="_controller">NeutronUserBundle:Management:delete</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+</routes>

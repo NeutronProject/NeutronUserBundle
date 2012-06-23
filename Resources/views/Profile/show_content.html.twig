@@ -1,0 +1,71 @@
+<div id="messages">
+ 	{% for flashMessage in app.session.flashbag.get('neutron_user.profile.success') %}
+        <div class="msg success"><p> {{ flashMessage }}  </p><a class="close">×</a></div>
+    {% endfor %}
+</div>
+
+<div class="neutron-accordion">
+	<h3><a href="#">{% trans from "NeutronUserBundle" %}profile.general_info{% endtrans %}</a></h3>
+	<div>
+        <table class="table">
+        	<tbody>
+        		<tr>
+        			<td><strong>{{ 'form.user'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.username }}</td>
+        		</tr>
+        		
+        		<tr>
+        			<td><strong>{{ 'form.email'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.email }}</td>
+        		</tr>
+        		
+        		<tr>
+        			<td><strong>{{ 'form.role'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.role }}</td>
+        		</tr>
+        		
+        		<tr>
+        			<td><strong>{{ 'form.enabled'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.enabled|yes_no }}</td>
+        		</tr>
+        		
+        		<tr>
+        			<td><strong>{{ 'form.locked'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.locked|yes_no }}</td>
+        		</tr>
+        		
+        		<tr>
+        			<td><strong>{{ 'form.expired'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.expired|yes_no }}</td>
+        		</tr>
+        		
+        		<tr>
+        			<td><strong>{{ 'form.expired_at'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.credentialsExpireAt is empty ? '-----'|trans({}, 'NeutronUserBundle') : user.credentialsExpireAt|date("Y/m/d H:i:s") }}</td>
+                </tr>
+                
+        		<tr>
+        			<td><strong>{{ 'form.last_login'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.lastLogin is empty ? 'no_data'|trans({}, 'NeutronUserBundle') : user.lastLogin|date("Y/m/d H:i:s") }}</td>
+                </tr>
+                
+        		<tr>
+        			<td><strong>{{ 'form.password_requested_at'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ user.passwordRequestedAt is empty ? '-----'|trans({}, 'NeutronUserBundle') : user.passwordRequestedAt|date("Y/m/d H:i:s") }}</td>
+                </tr>
+        	
+        	</tbody>
+        </table>
+        
+        <div style="clear:both"></div>
+        
+        <div class="actions">
+            <div class="controls">
+                <a href="{{ path('fos_user_profile_edit') }}" style="float:right; margin:5px;" class="btn" >{{ 'neutron_user.profile.edit'|trans({}, 'NeutronUserBundle') }}</a>
+            </div>
+        </div> 	
+        
+	</div>
+</div>
+
+

@@ -1,0 +1,9 @@
+{% block subject %}Resetting your password{% endblock %}
+
+{% block body_html %}
+	Hello {{ user.username }} !
+
+	You can reset your email by accessing {{ confirmationUrl }}
+
+	Greetings
+{% endblock %}

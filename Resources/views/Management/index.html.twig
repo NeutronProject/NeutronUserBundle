@@ -1,0 +1,39 @@
+{% extends "NeutronAdminBundle::layout.html.twig" %}
+
+{% block javascripts %}
+    {{ neutron_append_javascript('bundles/neutronuser/js/jqgrid-formatters/formatters.js') }}
+    {{ neutron_append_javascript('bundles/neutronuser/js/management/index.js') }}
+ 
+    {{ parent() }}
+{% endblock %}
+
+{% block headTitle %}{% trans from "NeutronUserBundle" %}head_title{% endtrans %}{% endblock %}
+
+{% block headDesc %}
+    <h1 class="icon tables">
+        {% trans from "NeutronUserBundle" %}header.user_management{% endtrans %}
+    </h1>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="grid12">
+		<article class="panel">
+		 	<header class="divider">
+		 	    <h2>{% trans from "NeutronUserBundle" %}header.sub_user_management{% endtrans %}</h2>
+		 	</header>
+		 	
+		 	<div id="messages">
+    		 	{% for flashMessage in app.session.flashbag.get('neutron_user_management_success') %}
+                    <div class="msg success"><p> {{ flashMessage }}  </p><a class="close">×</a></div>
+                {% endfor %}
+		 	</div>
+		 	
+		 	<div>{{ neutron_datagrid(userManagementGrid) }}</div>		 	
+		</article>	
+	</div>
+</div>
+
+{% include 'NeutronUserBundle:Management:prototypes.html.twig' %}
+
+{% endblock %}

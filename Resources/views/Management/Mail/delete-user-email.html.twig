@@ -1,0 +1,9 @@
+{% block subject %}{{ 'management.delete_user.mail.subject'|trans({}, 'NeutronUserBundle') }}{% endblock %}
+
+{% block body_html %}
+
+<h3>{{ 'management.delete_user.mail.text'|trans({}, 'NeutronUserBundle') }}</h3>
+
+<p><label>{{ 'form.username'|trans({}, 'NeutronUserBundle') }}</label> {{ user.username }}</p>
+
+{% endblock %}

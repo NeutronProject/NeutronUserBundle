@@ -1,0 +1,136 @@
+<?xml version="1.0" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="Neutron\UserBundle\Entity\User">
+
+        <constraint name="FOS\UserBundle\Validator\Unique">
+            <option name="property">usernameCanonical</option>
+            <option name="message">fos_user.username.already_used</option>
+            <option name="groups">
+                <value>Registration</value>
+                <value>Management</value>
+            </option>
+        </constraint>
+        
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+	        <option name="fields">username</option>
+	        <option name="message">neutron_user.username.already_used</option>
+   	    </constraint>       
+
+        <constraint name="FOS\UserBundle\Validator\Unique">
+            <option name="property">emailCanonical</option>
+            <option name="message">fos_user.email.already_used</option>
+            <option name="groups">
+                <value>Registration</value>
+                <value>Management</value>
+            </option>
+        </constraint>
+        
+           	    
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+	        <option name="fields">email</option>
+	        <option name="message">neutron_user.email.already_used</option>
+   	    </constraint>
+
+        <property name="username">
+        
+	       <constraint name="NotBlank">
+                <option name="message">fos_user.username.blank</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Management</value>
+                </option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">fos_user.username.short</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Management</value>
+                </option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">fos_user.username.long</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                    <value>Management</value>
+                </option>
+            </constraint>
+        </property>
+
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="message">fos_user.email.blank</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Management</value>
+                </option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">fos_user.email.short</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Management</value>
+                </option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">254</option>
+                <option name="message">fos_user.email.long</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Management</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="message">fos_user.email.invalid</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Management</value>
+                </option>
+            </constraint>
+        </property>
+        
+        <property name="roles">
+            <constraint name="NotBlank">
+                <option name="message">fos_user.roles.blank</option>
+                <option name="groups">
+                	<value>Management</value>
+                </option>
+            </constraint>
+        </property>
+
+        <property name="plainPassword">
+            <constraint name="NotBlank">
+                <option name="message">fos_user.password.blank</option>
+                <option name="groups">
+                	<value>Registration</value>
+                	<value>Management.Add</value>
+                </option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">fos_user.password.short</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Management</value>
+                </option>
+            </constraint>
+        </property>
+        
+        <property name="currentPassword">
+            <constraint name="Symfony\Bundle\SecurityBundle\Validator\Constraint\UserPassword">
+                <option name="message">neutron_user.current.invalid</option>
+                <option name="groups">
+                    <value>Profile.Edit</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+
+</constraint-mapping>

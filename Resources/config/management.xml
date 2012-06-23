@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="neutron_user.datagrid.user_management.class">Neutron\UserBundle\DataGrid\UserManagement</parameter>
+    </parameters>
+    
+    <services>
+
+        <service id="neutron_user.management.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+            <argument>%neutron_user.management.form.name%</argument>
+            <argument>%neutron_user.management.form.type%</argument>
+        </service>
+
+        <service id="neutron_user.management.form.type" class="Neutron\UserBundle\Form\Type\ManagementFormType">
+            <argument>%fos_user.model.user.class%</argument>
+            <tag name="form.type" alias="neutron_user_management" />
+        </service>
+
+        <service id="neutron_user.management.form.handler.default" class="Neutron\UserBundle\Form\Handler\ManagementFormHandler" scope="request" public="false">
+            <argument type="service" id="neutron_user.management.form" />
+            <argument type="service" id="neutron_component.form.helper.form_helper" />
+            <argument type="service" id="request" />
+            <argument type="service" id="router" />
+            <argument type="service" id="fos_user.user_manager" />
+            <argument type="service" id="fos_user.mailer" />
+        </service>
+        
+        <service id="user_bundle.datagrid.user_management" 
+        	class="%neutron_user.datagrid.user_management.class%"
+        	scope="request"
+       	>
+        	<argument type="service" id="neutron_data_grid.factory" />
+        	<argument type="service" id="doctrine.orm.entity_manager" />
+        	<argument type="service" id="security.context" />
+        	<argument type="service" id="translator" />
+        	<argument type="service" id="router" />
+        </service>
+        
+        <service id="user_bundle.datagrid.factory.user_management" 
+        	class="Neutron\Bundle\DataGridBundle\DataGrid\DataGrid"
+        	factory-service="user_bundle.datagrid.user_management"
+        	factory-method="build"
+        >
+        	<tag name="neutron_data_grid.datagrid" alias="user_management" />
+        </service>
+        
+        <service id="user_bundle.event_listener.datagrid.user_management.mass_action" 
+        		 class="Neutron\UserBundle\EventListener\DataGrid\UserManagement\MassActionListener">
+        	<argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="kernel.event_listener" event="neutron_datagrid.onMassAction" method="onMassAction" />
+        </service>  
+        
+        <service id="neutron_user.role_to_roles_transformer" class="Neutron\UserBundle\Form\DataTransformer\RoleToRolesTransformer" public="false" />
+        
+                
+        <service id="neutron_user.form.event_subscriber.user" class="Neutron\UserBundle\Form\EventSubscriber\UserSubscriber">
+		    <argument type="service" id="form.factory"/>
+		    <argument type="service" id="security.context"/>
+		</service>
+		
+        <service id="neutron_user.form.type.user" class="Neutron\UserBundle\Form\Type\Management\UserType">
+		    <argument type="service" id="neutron_user.form.event_subscriber.user"/>
+		    <tag name="form.type" alias="neutron_user_type" />
+		</service>
+		
+        <service id="neutron_user.form.type.role" class="Neutron\UserBundle\Form\Type\RoleFormType">
+		    <argument type="service" id="neutron_user.role_to_roles_transformer"/>
+		    <tag name="form.type" alias="neutron_user_role" />
+		</service>
+		
+		<service id="neutron_user.event_subscriber.doctrine.user" class="Neutron\UserBundle\EventSubscriber\Doctrine\UserSubscriber">
+            <argument type="service" id="service_container" />
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+    </services>
+
+</container>

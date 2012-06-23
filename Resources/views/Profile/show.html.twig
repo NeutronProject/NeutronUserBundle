@@ -1,0 +1,22 @@
+{% extends "NeutronAdminBundle::layout.html.twig" %}
+
+{% block headTitle %} {% trans from "NeutronUserBundle" %}head_title{% endtrans %} {% endblock %}
+
+{% block headDesc %}
+    <h1 class="icon messages"> {% trans from "NeutronUserBundle" %}header.profile.show{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="grid12">
+		<article class="panel">
+		 	<header>
+		 	    <h2>{% trans from "NeutronUserBundle" %}sub_header.profile.show{% endtrans %}</h2>
+		 	</header>
+              
+            {% include "NeutronUserBundle:Profile:show_content.html.twig" %}
+            
+		</article>	
+	</div>
+</div>
+{% endblock %}

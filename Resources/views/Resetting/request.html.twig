@@ -1,0 +1,10 @@
+{% extends "NeutronAdminBundle::login.html.twig" %}
+
+{% block javascripts %}
+	{{ neutron_append_javascript('bundles/neutronuser/js/resetting/request.js') }}
+	{{ parent() }}
+{% endblock %}
+
+{% block fos_user_content %}
+	{% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+{% endblock fos_user_content %}

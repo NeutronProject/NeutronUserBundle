@@ -1,0 +1,14 @@
+{% extends "NeutronAdminBundle::login.html.twig" %}
+
+{% block fos_user_content %}
+<header class="divider">
+	<h2>Password reset</h2>
+</header>
+<p>
+	{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}
+	<br/><br/>
+	<small><a href="{{ path('fos_user_security_login') }}" title="{{ 'resetting.request.back_to_login'|trans({}, 'NeutronUserBundle') }}">
+		{{ 'resetting.request.back_to_login'|trans({}, 'NeutronUserBundle') }}</a></small>
+</p>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="fos_user.resetting.email.template">FOSUserBundle:Resetting:email.txt.twig</parameter>
+        <parameter key="fos_user.registration.confirmation.template">FOSUserBundle:Registration:email.txt.twig</parameter>
+        <parameter key="neutron_user.management.notification.template.add">NeutronUserBundle:Management\Mail:add-user-email.html.twig</parameter>
+        <parameter key="neutron_user.management.notification.template.edit">NeutronUserBundle:Management\Mail:edit-user-email.html.twig</parameter>
+        <parameter key="neutron_user.management.notification.template.delete">NeutronUserBundle:Management\Mail:delete-user-email.html.twig</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="neutron_user.mailer.default" class="Neutron\UserBundle\Mailer\TwigSwiftMailer" public="false">
+            <argument type="service" id="mailer" />
+            <argument type="service" id="router" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="security.context" />
+            <argument type="collection">
+            	<argument key="management" type="collection">
+            		<argument key="notification_enabled">%neutron_user.management.notification.enabled%</argument>
+	            	<argument key="template" type="collection">
+	            		<argument key="notification" type="collection">
+		                    <argument key="add">%neutron_user.management.notification.template.add%</argument>
+		                    <argument key="edit">%neutron_user.management.notification.template.edit%</argument>
+		                    <argument key="delete">%neutron_user.management.notification.template.delete%</argument>
+	                    </argument>
+	                    <argument key="confirmation">%fos_user.registration.confirmation.template%</argument>
+	                    <argument key="resetting">%fos_user.resetting.email.template%</argument>
+	                </argument>
+	            </argument>
+                <argument key="template" type="collection">
+            		<argument key="confirmation">%fos_user.registration.confirmation.template%</argument>
+                    <argument key="resetting">%fos_user.resetting.email.template%</argument>
+	            </argument>
+                <argument key="from_email" type="collection">
+                    <argument key="confirmation">%fos_user.registration.confirmation.from_email%</argument>
+                    <argument key="resetting">%fos_user.resetting.email.from_email%</argument>
+                </argument>     
+            </argument>
+        </service>
+
+    </services>
+
+</container>

@@ -1,0 +1,25 @@
+<table class="table">
+    <tbody>
+    	<tr>
+    		<td><strong>{{ 'form.user'|trans({}, 'NeutronUserBundle') }}</strong></td>
+    		<td class="actions">{{ user.username }}</td>
+    	</tr>
+    	
+    	<tr>
+    		<td><strong>{{ 'form.email'|trans({}, 'NeutronUserBundle') }}</strong></td>
+    		<td class="actions">{{ user.email }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="clear:both"></div>
+
+<div class="actions">
+    <div class="controls">
+        <form action="{{ app.request.requestUri }}" method="POST">
+            <input type="hidden" name="delete" value="1"/>
+            <input type="submit"  style="float:right; margin:5px;" type="submit" class="btn" value="{{ 'neutron_user.management.delete'|trans({}, 'NeutronUserBundle') }}">
+            <a href="{{ path('neutron_user_management') }}" style="float:right; margin:5px;" class="btn action" >{{ 'neutron_user.management.back'|trans({}, 'NeutronUserBundle') }}</a>
+        </form>   
+    </div>
+</div> 	
