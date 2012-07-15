@@ -1,15 +1,9 @@
 <?php
 namespace Neutron\UserBundle\Form\Type\Profile;
 
-use Neutron\UserBundle\Form\DataTransformer\RoleToRolesTransformer;
-
-use Symfony\Component\Validator\Constraints\MinLength;
+use Symfony\Component\Security\Core\Validator\Constraint\UserPassword;
 
 use Symfony\Component\Form\FormInterface;
-
-use Neutron\UserBundle\Form\EventSubscriber\UserSubscriber;
-
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -44,11 +38,9 @@ class UserType extends AbstractType
                     
                 'first_options'  => array(
                     'label' => 'Password',
-                    'attr' => array('class' => 'uniform'),
                 ),
                 'second_options' => array(
                     'label' => 'Repeat Password',
-                    'attr' => array('class' => 'uniform'),
                 ),
                     
                 'translation_domain' => 'FOSUserBundle'
@@ -56,7 +48,13 @@ class UserType extends AbstractType
             
             ->add('currentPassword', 'password', array(
                 'label' => 'form.current',
-                 'property_path' => 'currentPassword',
+                'mapped' => false,
+                'constraints' => array(
+                    new UserPassword(array(
+                        'groups' => 'Profile.Edit', 
+                        'message' => 'neutron_user.current_password.message'
+                    ))
+                ),
                 'translation_domain' => 'NeutronUserBundle'
             ))
          
@@ -75,7 +73,7 @@ class UserType extends AbstractType
 
     public function getName()
     {
-        return 'neutron_user';
+        return 'neutron_user_profile_user';
     }
     
 }

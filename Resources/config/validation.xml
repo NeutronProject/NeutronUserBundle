@@ -12,12 +12,18 @@
             <option name="groups">
                 <value>Registration</value>
                 <value>Management</value>
+                <value>Profile.Edit</value>
             </option>
         </constraint>
         
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
 	        <option name="fields">username</option>
 	        <option name="message">neutron_user.username.already_used</option>
+	        <option name="groups">
+                <value>Registration</value>
+                <value>Management</value>
+                <value>Profile.Edit</value>
+            </option>
    	    </constraint>       
 
         <constraint name="FOS\UserBundle\Validator\Unique">
@@ -26,6 +32,7 @@
             <option name="groups">
                 <value>Registration</value>
                 <value>Management</value>
+                <value>Profile.Edit</value>
             </option>
         </constraint>
         
@@ -33,6 +40,11 @@
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
 	        <option name="fields">email</option>
 	        <option name="message">neutron_user.email.already_used</option>
+	        <option name="groups">
+                <value>Registration</value>
+                <value>Management</value>
+                <value>Profile.Edit</value>
+            </option>
    	    </constraint>
 
         <property name="username">
@@ -42,6 +54,7 @@
                 <option name="groups">
                     <value>Registration</value>
                     <value>Management</value>
+                    <value>Profile.Edit</value>
                 </option>
             </constraint>
             <constraint name="MinLength">
@@ -50,6 +63,7 @@
                 <option name="groups">
                     <value>Registration</value>
                     <value>Management</value>
+                    <value>Profile.Edit</value>
                 </option>
             </constraint>
             <constraint name="MaxLength">
@@ -57,7 +71,7 @@
                 <option name="message">fos_user.username.long</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>Profile</value>
+                    <value>Profile.Edit</value>
                     <value>Management</value>
                 </option>
             </constraint>
@@ -69,6 +83,7 @@
                 <option name="groups">
                     <value>Registration</value>
                     <value>Management</value>
+                    <value>Profile.Edit</value>
                 </option>
             </constraint>
             <constraint name="MinLength">
@@ -77,6 +92,7 @@
                 <option name="groups">
                     <value>Registration</value>
                     <value>Management</value>
+                    <value>Profile.Edit</value>
                 </option>
             </constraint>
             <constraint name="MaxLength">
@@ -85,6 +101,7 @@
                 <option name="groups">
                     <value>Registration</value>
                     <value>Management</value>
+                    <value>Profile.Edit</value>
                 </option>
             </constraint>
             <constraint name="Email">
@@ -92,6 +109,7 @@
                 <option name="groups">
                     <value>Registration</value>
                     <value>Management</value>
+                    <value>Profile.Edit</value>
                 </option>
             </constraint>
         </property>
@@ -123,14 +141,6 @@
             </constraint>
         </property>
         
-        <property name="currentPassword">
-            <constraint name="Symfony\Bundle\SecurityBundle\Validator\Constraint\UserPassword">
-                <option name="message">neutron_user.current.invalid</option>
-                <option name="groups">
-                    <value>Profile.Edit</value>
-                </option>
-            </constraint>
-        </property>
     </class>
 
 </constraint-mapping>

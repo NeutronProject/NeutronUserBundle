@@ -18,14 +18,6 @@ class User extends BaseUser
     protected $id;
     
     /**
-     * Validate current password
-     * This property is not persisted
-     * 
-     * @var string
-     */
-    public $currentPassword;
-    
-    /**
      * @var string 
      *
      * @ORM\Column(type="string", name="role", length=255, nullable=true, unique=false)

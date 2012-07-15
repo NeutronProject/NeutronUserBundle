@@ -131,7 +131,7 @@ class UserType extends AbstractType
 
     public function getName()
     {
-        return 'neutron_user';
+        return 'neutron_user_type';
     }
     
 }
