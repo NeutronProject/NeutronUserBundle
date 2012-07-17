@@ -31,7 +31,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, array(
+            ->add('username', 'text', array(
                 'label' => 'form.username', 
                 'translation_domain' => 'FOSUserBundle',
             ))
@@ -55,11 +55,9 @@ class UserType extends AbstractType
                     
                 'first_options'  => array(
                     'label' => 'Password',
-                    'attr' => array('class' => 'uniform'),
                 ),
                 'second_options' => array(
                     'label' => 'Repeat Password',
-                    'attr' => array('class' => 'uniform'),
                 ),
                     
                 'translation_domain' => 'FOSUserBundle'
@@ -90,24 +88,24 @@ class UserType extends AbstractType
             ))
             
             ->add('credentials_expire_at', 'neutron_datetimepicker', array(
-                'label' => 'form.management.user.expire_at',
-                'input' => 'datetime',
-                'with_seconds' => true,
-                'attr' => array(),
-                'configs' => array(),
-                'translation_domain' => 'NeutronUserBundle'
-            ))
+                    'label' => 'form.management.user.expire_at',
+                    'input' => 'datetime',
+                    'with_seconds' => true,
+                    'attr' => array(),
+                    'configs' => array(),
+                    'translation_domain' => 'NeutronUserBundle'
+            )) 
             
             ->add('lastLogin', 'neutron_plain', array(
                 'label' => 'form.last_login',
                 'translation_domain' => 'NeutronUserBundle'
-            ))
+            )) 
             
             ->add('passwordRequestedAt', 'neutron_plain', array(
                 'label' => 'form.password_requested_at',
                 'translation_domain' => 'NeutronUserBundle'
-            ))
-         
+            )) 
+
         ;
         
         $builder->addEventSubscriber($this->userSubscrber);

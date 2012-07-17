@@ -6,8 +6,8 @@
 
     <class name="Neutron\UserBundle\Entity\User">
 
-        <constraint name="FOS\UserBundle\Validator\Unique">
-            <option name="property">usernameCanonical</option>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">usernameCanonical</option>
             <option name="message">fos_user.username.already_used</option>
             <option name="groups">
                 <value>Registration</value>
@@ -26,8 +26,8 @@
             </option>
    	    </constraint>       
 
-        <constraint name="FOS\UserBundle\Validator\Unique">
-            <option name="property">emailCanonical</option>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">emailCanonical</option>
             <option name="message">fos_user.email.already_used</option>
             <option name="groups">
                 <value>Registration</value>
@@ -110,15 +110,6 @@
                     <value>Registration</value>
                     <value>Management</value>
                     <value>Profile.Edit</value>
-                </option>
-            </constraint>
-        </property>
-        
-        <property name="roles">
-            <constraint name="NotBlank">
-                <option name="message">fos_user.roles.blank</option>
-                <option name="groups">
-                	<value>Management</value>
                 </option>
             </constraint>
         </property>

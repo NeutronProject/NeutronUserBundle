@@ -2,6 +2,8 @@
 namespace Neutron\UserBundle\Form\Type;
 
 
+use Symfony\Component\Validator\Constraints\Choice;
+
 use Neutron\UserBundle\Model\BackendRoles;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -37,6 +39,7 @@ class RoleFormType extends AbstractType
             'expanded' => false,
             'invalid_message' => 'neutron_user.form.invalid_role',
             'empty_value' => 'form.select',
+            'constraints' => new Choice(array('choices' => BackendRoles::getRoles())),
             'empty_data' => 'none',
             'choices' => array(
                 'form.backend_roles' => BackendRoles::getRoles(),

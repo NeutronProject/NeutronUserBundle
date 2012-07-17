@@ -30,11 +30,12 @@ class AuthenticationHandler
 	public function onAuthenticationSuccess(Request $request, TokenInterface $token)
 	{
 	    
-	    $targetPath = $request->getSession()->get('_security.target_path');
+	    $targetPath = $request->getSession()->get('_security.main.target_path');
+	    
 	    if ($targetPath) {
 	        $url = $targetPath;
 	    } else {
-	        // Otherwise, redirect him to wherever you want
+	        $url = $this->router->generate('dashboard');
 	        
 	    }
 	    

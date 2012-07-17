@@ -2,11 +2,8 @@
 
 namespace Neutron\UserBundle\Form\DataTransformer;
 
-use Neutron\UserBundle\Entity\User;
-
-use FOS\UserBundle\Model\UserInterface;
-
 use Symfony\Component\Form\DataTransformerInterface;
+
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 class RoleToRolesTransformer implements DataTransformerInterface
