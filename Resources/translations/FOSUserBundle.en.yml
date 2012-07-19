@@ -1,0 +1,20 @@
+change_password:
+    submit: change_password.submit   # FIXME
+
+resetting:
+    check_email: resetting.check_email   # FIXME
+    password_already_requested: resetting.password_already_requested   # FIXME
+
+    request:
+        invalid_username: resetting.request.invalid_username   # FIXME
+        submit: resetting.request.submit   # FIXME
+        username: resetting.request.username   # FIXME
+
+    reset:
+        submit: resetting.reset.submit   # FIXME
+
+security:
+    login:
+        password: security.login.password   # FIXME
+        submit: security.login.submit   # FIXME
+        username: security.login.username   # FIXME

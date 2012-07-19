@@ -1,0 +1,15 @@
+form:
+    current: form.current   # FIXME
+    email: form.email   # FIXME
+    enabled: form.enabled   # FIXME
+    expired: form.expired   # FIXME
+    last_login: form.last_login   # FIXME
+    locked: form.locked   # FIXME
+
+    management:
+        user:
+            expire_at: form.management.user.expire_at   # FIXME
+
+    password_requested_at: form.password_requested_at   # FIXME
+    roles: form.roles   # FIXME
+    username: form.username   # FIXME

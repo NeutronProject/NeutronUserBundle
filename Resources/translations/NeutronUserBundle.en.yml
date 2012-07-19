@@ -1,137 +1,93 @@
-# Group
-group:
-    edit:
-        submit: Update group
-    show:
-        name: Group name
-    new:
-        submit: Create group
-    flash:
-        updated: The group has been updated
-        created: The group has been created
-        deleted: The group has been deleted
+-----: -----   # FIXME
 
-# Security
-"Bad credentials": Invalid username or password
+form:
+    email: form.email   # FIXME
+    enabled: form.enabled   # FIXME
+    expired: form.expired   # FIXME
+    expired_at: form.expired_at   # FIXME
+    last_login: form.last_login   # FIXME
+    locked: form.locked   # FIXME
+    password: form.password   # FIXME
+    password_requested_at: form.password_requested_at   # FIXME
+    role: form.role   # FIXME
+    user: form.user   # FIXME
+    username: form.username   # FIXME
+
+grid:
+    user_management:
+        disable_users: grid.user_management.disable_users   # FIXME
+        email: Email
+        enable_users: 'Enable users'
+        enabled: Enabled
+        expired: Expired
+        lock_users: grid.user_management.lock_users   # FIXME
+        locked: Locked
+        role: Role
+        title: 'User management'
+        unlock_users: grid.user_management.unlock_users   # FIXME
+        username: Username
+
+head_title: 'User management'
+
+header:
+    profile:
+        edit: header.profile.edit   # FIXME
+        show: header.profile.show   # FIXME
+
+    sub_user_management: 'User management'
+    sub_user_management.delete: header.sub_user_management.delete   # FIXME
+    sub_user_management_add: header.sub_user_management_add   # FIXME
+    sub_user_management_update: header.sub_user_management_update   # FIXME
+    user_management: 'User management <small>managing users</small>'
+    user_management.delete: header.user_management.delete   # FIXME
+
+login_url: login_url   # FIXME
+
+management:
+    add_user:
+        mail:
+            subject: management.add_user.mail.subject   # FIXME
+            text: management.add_user.mail.text   # FIXME
+
+    delete_user:
+        mail:
+            subject: management.delete_user.mail.subject   # FIXME
+            text: management.delete_user.mail.text   # FIXME
+
+    edit_user:
+        mail:
+            subject: management.edit_user.mail.subject   # FIXME
+            text: management.edit_user.mail.text   # FIXME
+
+    message:
+        mass_action:
+            disable_users: management.message.mass_action.disable_users   # FIXME
+            enable_users: management.message.mass_action.enable_users   # FIXME
+            lock_users: management.message.mass_action.lock_users   # FIXME
+            unlock_users: management.message.mass_action.unlock_users   # FIXME
+
+neutron_user:
+    management:
+        back: neutron_user.management.back   # FIXME
+        delete: neutron_user.management.delete   # FIXME
+
+    profile:
+        edit: neutron_user.profile.edit   # FIXME
+
+no_data: no_data   # FIXME
+
+profile:
+    general_info: profile.general_info   # FIXME
+
+resetting:
+    request:
+        back_to_login: 'Back to login'
 
 security:
     login:
-        username: "Username:"
-        password: "Password:"
-        remember_me: Remember me
-        submit: Login
-        forgotten_password: Forgotten password?
+        forgotten_password: 'Forgotten password?'
 
-# Profile
-profile:
-    show:
-        username: Username
-        email: Email
-    edit:
-        submit: Update
-    flash:
-        updated: The profile has been updated
-
-# Password change
-change_password:
-    submit: Change password
-    flash:
-        success: The password has been changed
-
-# Registration
-registration:
-    check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
-    confirmed: Congrats %username%, your account is now activated.
-    back: Back to the originating page.
-    submit: Register
-    flash:
-        user_created: The user has been created successfully
-    email:
-        subject: Welcome %username%!
-        message: |
-            Hello %username%!
-
-            To finish activating your account - please visit %confirmationUrl%
-
-            Regards,
-            the Team.
-
-# Password resetting
-resetting:
-    password_already_requested: The password for this user has already been requested within the last 24 hours.
-    check_email: An email has been sent to %email%. It contains a link you must click to reset your password.
-    request:
-        invalid_username: The username or email address "%username%" does not exist.
-        username: "Username or email address:"
-        submit: Reset password
-        back_to_login: "Back to login"
-    reset:
-        submit: Change password
-    flash:
-        success: The password has been reset successfully
-    email:
-        subject: Reset Password
-        message: |
-            Hello %username%!
-
-            To reset your password - please visit %confirmationUrl%
-
-            Regards,
-            the Team.
-
-# Global strings
-layout:
-    logout: Logout
-    login: Login
-    register: Register
-    logged_in_as: Logged in as <strong>%username%</strong>
-
-# Form field labels
-fos_user_group_form_name: "Group name:"
-
-fos_user_profile_form_user_username: "Username:"
-fos_user_profile_form_user_email: "Email:"
-fos_user_profile_form_current: "Current Password:"
-
-fos_user_registration_form_username: "Username:"
-fos_user_registration_form_email: "Email:"
-fos_user_registration_form_plainPassword_first: "Password:"
-fos_user_registration_form_plainPassword_second: "Verification:"
-
-fos_user_resetting_form_new_first: "New password:"
-fos_user_resetting_form_new_second: "Verification:"
-
-fos_user_change_password_form_new_first: "New password:"
-fos_user_change_password_form_new_second: "Verification:"
-fos_user_change_password_form_current: "Current password:"
-
-#Headers
-head_title: User management
-header:
-    user_management:  User management <small>managing users</small>
-    sub_user_management:  User management 
-
-#Menu
-menu:
-    user_management: User management
-    
-#Grids
-grid:
-    user_management: 
-        title: User management
-        username: Username
-        email: Email
-        role: Role
-        enabled: Enabled
-        locked: Locked
-        expired: Expired
-        enable_users: Enable users
-        
-management:
-    message:
-        mass_action: 
-            user_activate: Users have been successfully activated
-    
- 
-        
-        
+sub_header:
+    profile:
+        edit: sub_header.profile.edit   # FIXME
+        show: sub_header.profile.show   # FIXME
