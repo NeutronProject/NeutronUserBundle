@@ -20,6 +20,11 @@
         		</tr>
         		
         		<tr>
+        			<td><strong>{{ 'form.locale'|trans({}, 'NeutronUserBundle') }}</strong></td>
+        			<td class="actions">{{ neutron_admin_language_get(user.locale) }}</td>
+        		</tr>
+        		
+        		<tr>
         			<td><strong>{{ 'form.role'|trans({}, 'NeutronUserBundle') }}</strong></td>
         			<td class="actions">{{ user.role }}</td>
         		</tr>

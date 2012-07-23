@@ -14,7 +14,14 @@ use Symfony\Component\Form\AbstractType;
 
 class UserType extends AbstractType
 {
-        
+
+    protected $languages;
+    
+    public function __construct(array $languages)
+    {
+        $this->languages = $languages;
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -25,6 +32,16 @@ class UserType extends AbstractType
             ->add('email', 'email', array(
                 'label' => 'form.email', 
                 'translation_domain' => 'FOSUserBundle'
+            ))
+            
+            ->add('locale', 'choice', array(
+                'choices' => $this->languages,
+                'multiple' => false,
+                'expanded' => false,
+                'attr' => array('class' => 'uniform'),
+                'label' => 'form.locale',
+                'empty_value' => 'form.empty_value',
+                'translation_domain' => 'NeutronUserBundle'
             ))
  
             ->add('plainPassword', 'repeated', array(

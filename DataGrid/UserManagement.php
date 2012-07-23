@@ -51,7 +51,6 @@ class UserManagement
             ->setColNames(array(
                 $this->translator->trans('grid.user_management.username',  array(), 'NeutronUserBundle'),
                 $this->translator->trans('grid.user_management.email',  array(), 'NeutronUserBundle'),
-                $this->translator->trans('grid.user_management.role',  array(), 'NeutronUserBundle'),
                 $this->translator->trans('grid.user_management.enabled',  array(), 'NeutronUserBundle'),
                 $this->translator->trans('grid.user_management.locked',  array(), 'NeutronUserBundle'),
                 $this->translator->trans('grid.user_management.expired',  array(), 'NeutronUserBundle'),
@@ -73,14 +72,6 @@ class UserManagement
                 'sortable' => true
             ), 
                     
-            array(
-                'name' => 'u.role',
-                'index' => 'u.role',
-                'width' => 200,
-                'align' => 'left',
-                'sortable' => true,
-                'search' => true
-            ),
             array(
                   'name' => 'u.enabled', 
                   'index' => 'u.enabled', 
@@ -120,7 +111,6 @@ class UserManagement
             ->setQueryBuilder($this->getQb())
             ->setQueryBuilderParams(array(
                 ':username' => $this->getUsername(),
-                ':role' => 'ROLE_SUPER_ADMIN'   
             ))
             ->setSortName('u.username')
             ->setSortOrder('asc')
@@ -148,12 +138,9 @@ class UserManagement
     private function getQb ()
     {
         return $this->em->createQueryBuilder()
-            ->select(array(
-                'u.id', 'u.username', 'u.email', 'u.role', 'u.enabled', 'u.locked', 'u.expired'
-            ))
+            ->select(array('u.id', 'u.username', 'u.email', 'u.enabled', 'u.locked', 'u.expired'))
             ->from('NeutronUserBundle:User', 'u')
-            ->where('u.role <> :role')
-            ->andWhere('u.username <> :username')
+            ->where('u.username <> :username')
             
         ;
     }

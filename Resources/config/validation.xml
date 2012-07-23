@@ -132,6 +132,16 @@
             </constraint>
         </property>
         
+        <property name="roles">
+            <constraint name="NotBlank">
+                <option name="message">neutron_user.roles.blank</option>
+                <option name="groups">
+                	<value>Registration</value>
+                	<value>Management</value>
+                </option>
+            </constraint>
+        </property>
+        
     </class>
 
 </constraint-mapping>

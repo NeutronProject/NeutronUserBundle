@@ -20,6 +20,7 @@
         </service>
         
         <service id="neutron_user.form.profile.user" class="Neutron\UserBundle\Form\Type\Profile\UserType">
+        	<argument>%neutron_admin.languages%</argument>
 			<tag name="form.type" alias="neutron_user_profile_user" />
 		</service>
 

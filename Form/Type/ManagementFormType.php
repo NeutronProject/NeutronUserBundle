@@ -29,7 +29,6 @@ class ManagementFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {   
         $builder->add('user', 'neutron_user_type');
-        //$builder->add('test', new TestType());
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

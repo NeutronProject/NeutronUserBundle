@@ -1,6 +1,8 @@
 <?php
 namespace Neutron\UserBundle\Form\Type\Management;
 
+use Neutron\UserBundle\Model\BackendRoles;
+
 use Neutron\UserBundle\Form\DataTransformer\RoleToRolesTransformer;
 
 use Symfony\Component\Validator\Constraints\MinLength;
@@ -39,11 +41,16 @@ class UserType extends AbstractType
                 'label' => 'form.email', 
                 'translation_domain' => 'FOSUserBundle'
             ))
-            ->add('roles', 'neutron_user_role', array(
+            
+            ->add('roles', 'neutron_select', array(
                 'label' => 'form.roles',
+                'widget' => 'choice',
+                'multiple' => true,
+                'choices' => BackendRoles::getRoles(),
+                'configs' => array('filter' => true),
                 'translation_domain' => 'FOSUserBundle'
             ))
-            
+
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
                 'required' => false,
@@ -65,7 +72,7 @@ class UserType extends AbstractType
             
             ->add('enabled', 'checkbox', array(
                 'label' => 'form.enabled',
-                'value' => 1,
+                'value' => true,
                 'required' => false,
                 'attr' => array('class' => 'uniform'),
                 'translation_domain' => 'FOSUserBundle'
@@ -73,7 +80,7 @@ class UserType extends AbstractType
             
             ->add('locked', 'checkbox', array(
                 'label' => 'form.locked', 
-                'value' => 1,
+                'value' => true,
                 'required' => false,
                 'attr' => array('class' => 'uniform'),
                 'translation_domain' => 'NeutronUserBundle'
@@ -81,19 +88,19 @@ class UserType extends AbstractType
             
             ->add('expired', 'checkbox', array(
                 'label' => 'form.expired', 
-                'value' => 1,
+                'value' => true,
                 'required' => false,
                 'attr' => array('class' => 'uniform'),
                 'translation_domain' => 'NeutronUserBundle'
             ))
             
             ->add('credentials_expire_at', 'neutron_datetimepicker', array(
-                    'label' => 'form.management.user.expire_at',
-                    'input' => 'datetime',
-                    'with_seconds' => true,
-                    'attr' => array(),
-                    'configs' => array(),
-                    'translation_domain' => 'NeutronUserBundle'
+                'label' => 'form.management.user.expire_at',
+                'input' => 'datetime',
+                'with_seconds' => true,
+                'attr' => array(),
+                'configs' => array(),
+                'translation_domain' => 'NeutronUserBundle'
             )) 
             
             ->add('lastLogin', 'neutron_plain', array(

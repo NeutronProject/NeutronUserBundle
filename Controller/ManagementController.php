@@ -1,6 +1,8 @@
 <?php
 namespace Neutron\UserBundle\Controller;
 
+use Neutron\UserBundle\Entity\Admin;
+
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;

@@ -71,11 +71,6 @@
 		    <argument type="service" id="neutron_user.role_to_roles_transformer"/>
 		    <tag name="form.type" alias="neutron_user_role" />
 		</service>
-		
-		<service id="neutron_user.event_subscriber.doctrine.user" class="Neutron\UserBundle\EventSubscriber\Doctrine\UserSubscriber">
-            <argument type="service" id="service_container" />
-            <tag name="doctrine.event_subscriber" connection="default" />
-        </service>
 
     </services>
 
