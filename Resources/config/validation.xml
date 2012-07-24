@@ -143,5 +143,83 @@
         </property>
         
     </class>
+    
+    <class name="Neutron\UserBundle\Entity\Role">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+	        <option name="fields">role</option>
+	        <option name="message">neutron_user.role.already_used</option>
+	        <option name="groups">
+                <value>Role</value>
+            </option>
+   	    </constraint>
+   	    
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">neutron_user.role.name.blank</option>
+                <option name="groups">Role</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">neutron_user.role.name.short</option>
+                <option name="groups">Role</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">neutron_user.role.name.long</option>
+                <option name="groups">Role</option>
+            </constraint>
+        </property>
+        
+        <property name="role">
+            <constraint name="NotBlank">
+                <option name="message">neutron_user.role.role.blank</option>
+                <option name="groups">Role</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">neutron_user.role.role.short</option>
+                <option name="groups">Role</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">35</option>
+                <option name="message">neutron_user.role.role.long</option>
+                <option name="groups">Role</option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="pattern">/^[A-Z_]*$/</option>
+                <option name="match">true</option>
+                <option name="message">neutron_user.role.role.alpha</option>
+                <option name="groups">Role</option>
+            </constraint>
+        </property>
+    </class>
+    
+    <class name="Neutron\UserBundle\Entity\Group">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+	        <option name="fields">name</option>
+	        <option name="message">neutron_user.group.already_used</option>
+	        <option name="groups">
+                <value>Group</value>
+            </option>
+   	    </constraint>
+   	    
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">neutron_user.group.name.blank</option>
+                <option name="groups">Group</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">neutron_user.group.name.short</option>
+                <option name="groups">Group</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">neutron_user.group.name.long</option>
+                <option name="groups">Group</option>
+            </constraint>
+        </property>
+        
+    </class>
 
 </constraint-mapping>

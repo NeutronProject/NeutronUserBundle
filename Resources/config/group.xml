@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="neutron_user.controller.group.class">Neutron\UserBundle\Controller\GroupController</parameter>
+        <parameter key="neutron_user.datagrid.group_management.class">Neutron\UserBundle\DataGrid\GroupManagement</parameter>
+    </parameters>
+    
+    <services>
+
+        <service id="neutron_user.controller.group.default" class="%neutron_user.controller.group.class%">
+            <call method="setContainer">
+            	<argument type="service" id="service_container" />
+        	</call>
+        </service>
+
+		<service id="neutron_user.datagrid.group_management" 
+        	class="%neutron_user.datagrid.group_management.class%"
+        	scope="request"
+       	>
+        	<argument type="service" id="neutron_data_grid.factory" />
+        	<argument type="service" id="doctrine.orm.entity_manager" />
+        	<argument type="service" id="translator" />
+        	<argument type="service" id="router" />
+        </service>
+        
+        <service id="neutron_user.datagrid.factory.group_management" 
+        	class="Neutron\Bundle\DataGridBundle\DataGrid\DataGrid"
+        	factory-service="neutron_user.datagrid.group_management"
+        	factory-method="build"
+        >
+        	<tag name="neutron_data_grid.datagrid" alias="group_management" />
+        </service>
+        
+        <service id="neutron_user.group_manager.default" class="Neutron\UserBundle\Entity\GroupManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%neutron_user.model.group.class%</argument>
+        </service>
+        
+        <service id="neutron_user.group.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+            <argument>%neutron_user.group.form.name%</argument>
+            <argument>%neutron_user.group.form.type%</argument>
+        </service>
+        
+        <service id="neutron_user.group.form.type" class="Neutron\UserBundle\Form\Type\GroupFormType">
+            <argument>%neutron_user.model.group.class%</argument>
+            <tag name="form.type" alias="neutron_user_group_form_type" />
+        </service>
+        
+        <service id="neutron_user.group.form.handler.default" class="Neutron\UserBundle\Form\Handler\GroupFormHandler" scope="request" public="false">
+            <argument type="service" id="neutron_user.group.form" />
+            <argument type="service" id="neutron_component.form.helper.form_helper" />
+            <argument type="service" id="request" />
+            <argument type="service" id="router" />
+            <argument type="service" id="neutron_user.group_manager" />
+        </service>
+
+    </services>
+
+</container>

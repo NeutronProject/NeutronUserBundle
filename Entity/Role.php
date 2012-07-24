@@ -24,6 +24,13 @@ class Role implements RoleInterface
     /**
      * @var string 
      *
+     * @ORM\Column(type="string", name="name", length=255, nullable=false, unique=false)
+     */
+    protected $name;
+    
+    /**
+     * @var string 
+     *
      * @ORM\Column(type="string", name="role", length=35, nullable=false, unique=true)
      */
     protected $role;
@@ -40,6 +47,16 @@ class Role implements RoleInterface
         return $this->id;
     }
     
+    public function setName($name)
+    {
+        $this->name = (string) $name;
+    }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+    
     public function setRole($role)
     {
         $this->role = (string) $role;
@@ -50,7 +67,7 @@ class Role implements RoleInterface
         return $this->role;
     }
     
-    public function enable($bool)
+    public function setEnabled($bool)
     {
         $this->enabled = (bool) $bool;
     }

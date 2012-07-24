@@ -1,0 +1,19 @@
+{% extends "NeutronAdminBundle::layout.html.twig" %}
+{% block body %}
+<div class="row">
+	<div class="grid12">
+		<article class="panel">
+		 	<header class="divider"><h2>Headings</h2></header>
+            <div id="messages">
+    		 	{% for flashMessage in app.session.flashbag.get('neutron_user_group_success') %}
+                    <div class="msg success"><p> {{ flashMessage }}  </p><a class="close">×</a></div>
+                {% endfor %}
+		 	</div>
+		 	
+		 	<div>{{ neutron_datagrid(datagrid) }}</div>
+		 	
+		</article>
+
+	</div>
+</div>
+{% endblock %}

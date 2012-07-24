@@ -33,10 +33,19 @@ class NeutronUserExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
         
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
+        
         if (!empty($config['management'])) {
             $this->loadManagement($config['management'], $container, $loader);
         }
+        
+        if (!empty($config['group'])) {
+            $this->loadGroup($config['group'], $container, $loader);
+        }
+        
+        if (!empty($config['role'])) {
+            $this->loadRole($config['role'], $container, $loader);
+        }
+        
         
         foreach (array('security', 'validator', 'mailer', 'resetting', 'profile') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
@@ -56,6 +65,42 @@ class NeutronUserExtension extends Extension
             'notification' => 'neutron_user.management.notification.%s',
         ));
     }
+    
+    private function loadGroup(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('group.xml');
+        $container->setAlias('neutron_user.group_manager', $config['group_manager']);
+        $container->setAlias('neutron_user.group.form.handler', $config['form']['handler']);
+        $container->setAlias('neutron_user.controller.group', $config['group_controller']);
+        unset($config['form']['handler']);
+
+        
+        $this->remapParametersNamespaces($config, $container, array(
+            '' => array(
+                'group_class' => 'neutron_user.model.group.class',
+            ),
+            'form' => 'neutron_user.group.form.%s',
+        ));
+    }
+    
+    private function loadRole(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    { 
+        $loader->load('role.xml');
+        $container->setAlias('neutron_user.role_manager', $config['role_manager']);
+        $container->setAlias('neutron_user.role.form.handler', $config['form']['handler']);
+        $container->setAlias('neutron_user.controller.role', $config['role_controller']);
+        unset($config['form']['handler']);
+
+        
+        $this->remapParametersNamespaces($config, $container, array(
+            '' => array(
+                'role_class' => 'neutron_user.model.role.class',
+            ),
+            'form' => 'neutron_user.role.form.%s',
+        ));
+    }
+    
+    
     
 
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)

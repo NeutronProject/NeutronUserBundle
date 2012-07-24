@@ -1,0 +1,38 @@
+{% extends "NeutronAdminBundle::layout.html.twig" %}
+{% block body %}
+<div class="row">
+	<div class="grid12">
+		<article class="panel">
+		 	<header><h2>Headings</h2></header>
+		 	
+            <table class="table">
+                <tbody>
+                	<tr>
+                		<td><strong>{{ 'form.name'|trans({}, 'NeutronUserBundle') }}</strong></td>
+                		<td class="actions">{{ record.name }}</td>
+                	</tr>
+                    
+                	<tr>
+                		<td><strong>{{ 'form.enabled'|trans({}, 'NeutronRoleBundle') }}</strong></td>
+                		<td class="actions">{{ record.enabled|yes_no }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+            <div style="clear:both"></div>
+            
+            <div class="actions">
+                <div class="controls">
+                    <form action="{{ app.request.requestUri }}" method="POST">
+                        
+                        <button type="submit"  style="float:right; margin:5px;" type="submit" class="btn" name="operation" value="delete">{{ 'neutron_user.group.delete'|trans({}, 'NeutronUserBundle') }}</button>
+                        <a href="{{ path('neutron_user_group_management') }}" style="float:right; margin:5px;" class="btn action" >{{ 'group.management.back'|trans({}, 'NeutronUserBundle') }}</a>
+                    </form>   
+                </div>
+            </div> 	
+		</article>
+
+	</div>
+</div>
+{% endblock %}

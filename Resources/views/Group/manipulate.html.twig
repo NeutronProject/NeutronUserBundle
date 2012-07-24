@@ -1,0 +1,52 @@
+{% extends "NeutronAdminBundle::layout.html.twig" %}
+
+{% block javascripts %}
+    {{ neutron_append_javascript('jquery/plugins/blockui/jquery.blockUI.js') }}
+    {{ neutron_append_javascript('bundles/neutronadmin/js/form.js') }}
+    {{ parent() }}
+{% endblock %}
+
+{% block headTitle %} {% trans from "NeutronUserBundle" %}head_title{% endtrans %} {% endblock %}
+
+{% block headDesc %}
+    <h1 class="icon forms">
+        {% trans from "NeutronUserBundle" %}header.group_manipulation{% endtrans %}
+    </h1>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="grid12">
+		<article class="panel">
+		 	<header>
+		 	    <h2>{% trans from "NeutronUserBundle" %}header.sub_group_manipulation{% endtrans %}</h2>
+		 	</header>
+		 	{% form_theme form with ['NeutronAdminBundle:Form:form_theme.html.twig'] %}
+            
+            <div id="messages"></div>
+            <form class="form neutron_form_simple" action="" method="post"{{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+         
+            <div class="actions">
+                <div class="controls">
+                    <a href="#submit" style="float:right; margin:5px;" class="btn submit-type" >save</a>
+                    <a href="{{ path('neutron_user_group_management') }}" style="float:right; margin:5px;" class="btn action" >cancel</a>
+                    
+                </div>
+            </div>
+            </form>
+            
+        </article>	
+	</div>
+</div>
+
+<div id="message-form-invalid" style="display:none;">
+    <div class="msg error">
+        <p>{{ 'form.message.invalid'|trans({}, 'NeutronUserBundle') }}</p><a class="close">×</a>
+    </div>
+</div>
+
+<div id="block-ui-message" style="display:none">
+    <h3><img src="{{ neutron_base_url() }}files/images/ajax-loader.gif" /> {{ 'form.message.blockui'|trans({}) }}</h3>
+</div>
+{% endblock %}

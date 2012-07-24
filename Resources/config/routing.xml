@@ -24,4 +24,36 @@
         <requirement key="_method">GET|POST</requirement>
     </route>
     
+    <route id="neutron_user_role_management" pattern="/role">
+        <default key="_controller">neutron_user.controller.role:indexAction</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+    <route id="neutron_user_role_manipulate" pattern="/role/manipulate/{id}">
+        <default key="_controller">neutron_user.controller.role:manipulateAction</default>
+        <default key="id">0</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+    <route id="neutron_user_role_delete" pattern="/role/delete/{id}">
+        <default key="_controller">neutron_user.controller.role:deleteAction</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+    <route id="neutron_user_group_management" pattern="/group">
+        <default key="_controller">neutron_user.controller.group:indexAction</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+    <route id="neutron_user_group_manipulate" pattern="/group/manipulate/{id}">
+        <default key="_controller">neutron_user.controller.group:manipulateAction</default>
+        <default key="id">0</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
+    <route id="neutron_user_group_delete" pattern="/group/delete/{id}">
+        <default key="_controller">neutron_user.controller.group:deleteAction</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    
 </routes>

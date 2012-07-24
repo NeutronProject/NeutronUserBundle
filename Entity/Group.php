@@ -88,7 +88,15 @@ class Group implements GroupInterface
     
     public function getRoles()
     {
-        return $this->roles;
+        $roles = new ArrayCollection();
+        
+        foreach ($this->roles as $role){
+            if ($role->isEnabled()){
+                $roles->add($role);
+            }
+        }
+        
+        return $roles;
     }
     
     public function removeRole(RoleInterface $role)

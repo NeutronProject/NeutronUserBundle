@@ -1,6 +1,10 @@
 <?php
 namespace Neutron\UserBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
+
+use Doctrine\ORM\QueryBuilder;
+
 use Symfony\Component\Form\FormInterface;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -10,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 
 
-class RoleFormType extends AbstractType
+class GroupFormType extends AbstractType
 {
     
     protected $class;
@@ -27,9 +31,21 @@ class RoleFormType extends AbstractType
                 'label' => 'form.name',
                 'translation_domain' => 'NeutronUserBundle'
             ))
-            ->add('role', 'text', array(
-                'label' => 'form.role',
-                'translation_domain' => 'NeutronUserBundle'
+            ->add('roles', 'neutron_select_entity', array(
+                'label' => 'form.roles',
+                'multiple' => true,
+                'property' => 'name',
+                'query_builder' => function(EntityRepository $repo){
+                    $qb = $repo->createQueryBuilder('r');
+                    $qb->where('r.enabled = :enabled');
+                    $qb->orderBy('r.name', 'ASC');
+                    $qb->setParameter('enabled', true);
+                    
+                    return $qb;
+                },
+                'class' => 'Neutron\UserBundle\Entity\Role', 
+                'configs' => array('filter' => true),
+                'translation_domain' => 'FOSUserBundle'
             ))
             ->add('enabled', 'checkbox', array(
                 'label' => 'form.enabled', 
@@ -49,13 +65,13 @@ class RoleFormType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'csrf_protection' => false,
-            'validation_groups' => 'Role',
+            'validation_groups' => 'Group',
         ));
     }
 
     public function getName()
     {
-        return 'neutron_user_role_form_type';
+        return 'neutron_user_group_form_type';
     }
     
 }
