@@ -42,9 +42,8 @@ class UserType extends AbstractType
                 'translation_domain' => 'FOSUserBundle'
             ))
             
-            ->add('roles', 'neutron_select', array(
+            ->add('roles', 'neutron_select_choice', array(
                 'label' => 'form.roles',
-                'widget' => 'choice',
                 'multiple' => true,
                 'choices' => BackendRoles::getRoles(),
                 'configs' => array('filter' => true),

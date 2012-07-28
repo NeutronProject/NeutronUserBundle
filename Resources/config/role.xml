@@ -57,6 +57,10 @@
             <argument type="service" id="router" />
             <argument type="service" id="neutron_user.role_manager" />
         </service>
+        
+        <service id="neutron_user.event_subscriber.doctrine.role" class="Neutron\UserBundle\EventSubscriber\Doctrine\RoleSubscriber">
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
 
     </services>
 

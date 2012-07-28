@@ -11,6 +11,9 @@ class RoleManager implements RoleManagerInterface
 {
     protected $em;
     
+    /**
+     * @var 
+     */
     protected $repository;
     
     protected $class;
@@ -44,4 +47,20 @@ class RoleManager implements RoleManagerInterface
     {
         return $this->repository->findOneBy($criteria); 
     }
+    
+    public function getRoles()
+    {
+        return $this->repository->findBy(array('enabled' => true));
+    }
+    
+    public function getAvailableRoles()
+    {
+        $roles = array();
+        foreach ($this->repository->findAll() as $role){
+            $roles[] = $role->getRole();
+        }
+        
+        return $roles;
+    }
+    
 }

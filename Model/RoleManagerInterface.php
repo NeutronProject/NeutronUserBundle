@@ -10,5 +10,10 @@ interface RoleManagerInterface
     public function deleteRole(RoleInterface $role);
     
     public function findRoleBy(array $criteria);
+    
+    public function getRoles();
+    
+    public function getAvailableRoles();
+
 
 }

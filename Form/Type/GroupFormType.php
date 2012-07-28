@@ -17,11 +17,14 @@ use Symfony\Component\Form\AbstractType;
 class GroupFormType extends AbstractType
 {
     
-    protected $class;
+    protected $groupClass;
     
-    public function __construct($class)
+    protected $roleClass;
+    
+    public function __construct($groupClass, $roleClass)
     {
-        $this->class = $class;
+        $this->groupClass = $groupClass;
+        $this->roleClass = $roleClass;
     }
     
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -36,6 +39,7 @@ class GroupFormType extends AbstractType
                 'multiple' => true,
                 'property' => 'name',
                 'query_builder' => function(EntityRepository $repo){
+                
                     $qb = $repo->createQueryBuilder('r');
                     $qb->where('r.enabled = :enabled');
                     $qb->orderBy('r.name', 'ASC');
@@ -43,7 +47,7 @@ class GroupFormType extends AbstractType
                     
                     return $qb;
                 },
-                'class' => 'Neutron\UserBundle\Entity\Role', 
+                'class' => $this->roleClass, 
                 'configs' => array('filter' => true),
                 'translation_domain' => 'FOSUserBundle'
             ))
@@ -63,7 +67,7 @@ class GroupFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => $this->class,
+            'data_class' => $this->groupClass,
             'csrf_protection' => false,
             'validation_groups' => 'Group',
         ));

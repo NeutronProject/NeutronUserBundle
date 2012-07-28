@@ -47,6 +47,7 @@
         
         <service id="neutron_user.group.form.type" class="Neutron\UserBundle\Form\Type\GroupFormType">
             <argument>%neutron_user.model.group.class%</argument>
+            <argument>%neutron_user.model.role.class%</argument>
             <tag name="form.type" alias="neutron_user_group_form_type" />
         </service>
         
