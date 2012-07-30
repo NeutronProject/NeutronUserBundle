@@ -14,13 +14,6 @@ use Symfony\Component\Form\AbstractType;
 
 class UserType extends AbstractType
 {
-
-    protected $languages;
-    
-    public function __construct(array $languages)
-    {
-        $this->languages = $languages;
-    }
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
