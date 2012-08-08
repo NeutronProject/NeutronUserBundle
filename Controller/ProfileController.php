@@ -47,14 +47,7 @@ class ProfileController extends ContainerAware
 
         return $this->container->get('templating')->renderResponse(
             'FOSUserBundle:Profile:edit.html.twig',
-            array('form' => $this->container->get('neutron_admin.form_tabs')->createView(
-                $form, array('label' => 'save'), 
-                array(
-                    'label' => 'back', 
-                    'uri' => $this->container->get('router')->generate('fos_user_profile_show')
-                ),
-                'NeutronUserBundle'        
-            ))
+            array('form' => $form->createView())
         );
     }
     

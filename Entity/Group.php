@@ -9,7 +9,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
+ * @Gedmo\TranslationEntity(class="Neutron\UserBundle\Entity\Translation\GroupTranslation")
  * @ORM\Entity
  * @ORM\Table(name="neutron_group")
  */
@@ -24,10 +27,17 @@ class Group implements GroupInterface
     
     /**
      * @var string 
-     *
-     * @ORM\Column(type="string", name="name", length=35, nullable=false, unique=true)
+     * @Gedmo\Translatable
+     * @ORM\Column(type="string", name="name", length=35, nullable=false, unique=false)
      */
     protected $name;
+    
+    /**
+     * @var string 
+     *
+     * @ORM\Column(type="string", name="group_key", length=35, nullable=false, unique=true)
+     */
+    protected $group;
     
     /**
      * @var boolean 
@@ -59,6 +69,16 @@ class Group implements GroupInterface
     public function getName()
     {
         return $this->name;
+    }
+    
+    public function setGroup($group)
+    {
+        $this->group = $group;
+    }
+    
+    public function getGroup()
+    {
+        return $this->group;
     }
     
     public function setEnabled($bool)

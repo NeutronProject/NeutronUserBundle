@@ -1,6 +1,8 @@
 <?php
 namespace Neutron\UserBundle\DataGrid;
 
+use Doctrine\ORM\Query;
+
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
@@ -45,6 +47,7 @@ class GroupManagement
             ->setAutoWidth(true)
             ->setColNames(array(
                 $this->translator->trans('grid.group_management.name',  array(), 'NeutronUserBundle'),
+                $this->translator->trans('grid.group_management.group',  array(), 'NeutronUserBundle'),
                 $this->translator->trans('grid.group_management.enabled',  array(), 'NeutronUserBundle'),
   
                 
@@ -53,6 +56,15 @@ class GroupManagement
                 array(
                     'name' => 'g.name', 
                     'index' => 'g.name', 
+                    'width' => 200, 
+                    'align' => 'left', 
+                    'sortable' => true,
+                    'search' => true,
+                ), 
+                    
+                array(
+                    'name' => 'g.group', 
+                    'index' => 'g.group', 
                     'width' => 200, 
                     'align' => 'left', 
                     'sortable' => true,
@@ -82,7 +94,9 @@ class GroupManagement
             ->setEditBtnUri($this->router->generate('neutron_user_group_manipulate', array('id' => '{{ rowId }}'), true))
             ->enableDeleteButton(true)
             ->setDeleteBtnUri($this->router->generate('neutron_user_group_delete', array('id' => '{{ rowId }}'), true))
-            
+            ->setQueryHints(array(
+                Query::HINT_CUSTOM_OUTPUT_WALKER => 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker',
+            ))
         ;
 
 
@@ -93,7 +107,7 @@ class GroupManagement
     private function getQb ()
     {
         return $this->em->createQueryBuilder()
-            ->select(array('g.id', 'g.name', 'g.enabled'))
+            ->select(array('g.id', 'g.name', 'g.group', 'g.enabled'))
             ->from('NeutronUserBundle:Group', 'g')
             
         ;

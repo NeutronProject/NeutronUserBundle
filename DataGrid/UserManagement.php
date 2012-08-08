@@ -104,14 +104,10 @@ class UserManagement
                   'search' => true, 
                   'stype' => 'select',
                   'searchoptions' => array('value' => array(1 => 'expired', 0 => 'not_expired'))
-            ),
-                   
+            ),  
                     
             ))
             ->setQueryBuilder($this->getQb())
-            ->setQueryBuilderParams(array(
-                ':username' => $this->getUsername(),
-            ))
             ->setSortName('u.username')
             ->setSortOrder('asc')
             ->enablePager(true)
@@ -136,13 +132,19 @@ class UserManagement
     }
 
     private function getQb ()
-    {
-        return $this->em->createQueryBuilder()
+    {  
+        $conn = $this->em->getConnection();
+        $qb = $this->em->createQueryBuilder();
+        
+        $qb
             ->select(array('u.id', 'u.username', 'u.email', 'u.enabled', 'u.locked', 'u.expired'))
-            ->from('NeutronUserBundle:User', 'u')
+            ->from('Neutron\UserBundle\Entity\User', 'u')
             ->where('u.username <> :username')
+            ->where($qb->expr()->eq('u.username', $conn->quote($this->getUsername())))
             
         ;
+        
+        return $qb;
     }
     
     private function getUsername()

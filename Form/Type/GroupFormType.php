@@ -34,6 +34,10 @@ class GroupFormType extends AbstractType
                 'label' => 'form.name',
                 'translation_domain' => 'NeutronUserBundle'
             ))
+            ->add('group', 'text', array(
+                'label' => 'form.name',
+                'translation_domain' => 'NeutronUserBundle'
+            ))
             ->add('roles', 'neutron_select_entity', array(
                 'label' => 'form.roles',
                 'multiple' => true,

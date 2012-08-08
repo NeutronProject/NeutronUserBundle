@@ -1,6 +1,8 @@
 <?php
 namespace Neutron\UserBundle\DataGrid;
 
+use Doctrine\ORM\Query;
+
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
@@ -92,7 +94,9 @@ class RoleManagement
             ->setEditBtnUri($this->router->generate('neutron_user_role_manipulate', array('id' => '{{ rowId }}'), true))
             ->enableDeleteButton(true)
             ->setDeleteBtnUri($this->router->generate('neutron_user_role_delete', array('id' => '{{ rowId }}'), true))
-            
+            ->setQueryHints(array(
+                Query::HINT_CUSTOM_OUTPUT_WALKER => 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker',
+            ))
         ;
 
 

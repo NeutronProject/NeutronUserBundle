@@ -11,6 +11,8 @@
 
 namespace Neutron\UserBundle\Form\Type;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\Form\AbstractType;
@@ -24,13 +26,13 @@ class ResettingFormType extends AbstractType
         	'type' => 'password'
         ));
     }
-
-    public function getDefaultOptions()
+    
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'data_class' => 'FOS\UserBundle\Form\Model\ResetPassword',
             'csrf_protection' => false,
-        );
+        ));
     }
 
     public function getName()

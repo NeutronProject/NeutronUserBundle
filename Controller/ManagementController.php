@@ -36,15 +36,7 @@ class ManagementController extends Controller
         }
         
         return $this->render('NeutronUserBundle:Management:add.html.twig', array(
-            'form' => $this->container->get('neutron_admin.form_tabs')->createView(
-                $form, 
-                array('label' => 'save'), 
-                array(
-                    'label' => 'back', 
-                    'uri' => $this->container->get('router')->generate('neutron_user_management')
-                ),
-                'NeutronUserBundle'        
-            ) 
+            'form' => $form->createView()
         ));
     }
     
@@ -66,14 +58,7 @@ class ManagementController extends Controller
         }
 
         return $this->render('NeutronUserBundle:Management:edit.html.twig', array(
-            'form' => $this->container->get('neutron_admin.form_tabs')->createView(
-                $form, array('label' => 'save'), 
-                array(
-                    'label' => 'back', 
-                    'uri' => $this->container->get('router')->generate('neutron_user_management')
-                ),
-                'NeutronUserBundle'        
-            )    
+            'form' => $form->createView()  
         ));
     }
     

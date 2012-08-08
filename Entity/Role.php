@@ -4,9 +4,12 @@ namespace Neutron\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 use Neutron\UserBundle\Model\RoleInterface;
 
 /**
+ * @Gedmo\TranslationEntity(class="Neutron\UserBundle\Entity\Translation\RoleTranslation")
  * @ORM\Table(name="neutron_role")
  * @ORM\Entity
  */
@@ -23,7 +26,8 @@ class Role implements RoleInterface
     
     /**
      * @var string 
-     *
+     * 
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", name="name", length=255, nullable=false, unique=false)
      */
     protected $name;

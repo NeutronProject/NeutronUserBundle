@@ -16,7 +16,13 @@
 		 	    <h2> {% trans from "NeutronUserBundle" %}sub_header.profile.edit{% endtrans %}</h2>
 		 	</header>
 		 	
-		 	{{ form|raw }}
+		 	{{ neutron_form_tabs(
+		 	    form, 
+		 	    {'submit_label': 'form.save', 'translation_domain': 'NeutronAdminBundle'},
+		 	    {
+		 	        'cancel': {'label': 'form.back', 'style': 'btn action', 'url': path('fos_user_profile_show')}
+		 	    }
+		 	) }}
             
 		</article>	
 	</div>

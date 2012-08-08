@@ -52,7 +52,7 @@
 			<button id="_submit" class="btn action">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 			<input type="checkbox" id="_remember_me" name="_remember_me" title="Remember me" value="1">
 			<input id="_csrf_token" type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-			<img id="ajax-loader" style="display:none" src="{{ neutron_base_url() }}files/images/ajax-loader.gif" />
+			<img id="ajax-loader" style="display:none" src="{{ site_url }}files/images/ajax-loader.gif" />
 			</div>
 		</div>
 	</fieldset>
