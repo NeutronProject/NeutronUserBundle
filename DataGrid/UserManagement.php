@@ -116,14 +116,15 @@ class UserManagement
             ->enableAddButton(true)
             ->setAddBtnUri($this->router->generate('neutron_user_management_add'))
             ->enableEditButton(true)
-            ->setEditBtnUri($this->router->generate('neutron_user_management_edit', array('rowId' => '{{ rowId }}'), true))
+            ->setEditBtnUri($this->router->generate('neutron_user_management_edit', array('rowId' => '{id}'), true))
             ->enableDeleteButton(true)
-            ->setDeleteBtnUri($this->router->generate('neutron_user_management_delete', array('rowId' => '{{ rowId }}'), true))
+            ->setDeleteBtnUri($this->router->generate('neutron_user_management_delete', array('rowId' => '{id}'), true))
             ->enableMassActions(true)
             ->addMassAction('enableUsers', $this->translator->trans('grid.user_management.enable_users', array(), 'NeutronUserBundle'))
             ->addMassAction('disableUsers', $this->translator->trans('grid.user_management.disable_users', array(), 'NeutronUserBundle'))
             ->addMassAction('lockUsers', $this->translator->trans('grid.user_management.lock_users', array(), 'NeutronUserBundle'))
             ->addMassAction('unlockUsers', $this->translator->trans('grid.user_management.unlock_users', array(), 'NeutronUserBundle'))
+            ->setFetchJoinCollection(true)
         ;
 
 
@@ -137,10 +138,10 @@ class UserManagement
         $qb = $this->em->createQueryBuilder();
         
         $qb
-            ->select(array('u.id', 'u.username', 'u.email', 'u.enabled', 'u.locked', 'u.expired'))
+            ->select('u.id, u.username, u.email, u.enabled, u.locked, u.expired')
             ->from('Neutron\UserBundle\Entity\User', 'u')
-            ->where('u.username <> :username')
-            ->where($qb->expr()->eq('u.username', $conn->quote($this->getUsername())))
+    
+            ->where($qb->expr()->neq('u.username', $conn->quote($this->getUsername())))
             
         ;
         

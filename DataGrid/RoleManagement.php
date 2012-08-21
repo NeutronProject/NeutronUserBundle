@@ -91,9 +91,9 @@ class RoleManagement
             ->enableAddButton(true)
             ->setAddBtnUri($this->router->generate('neutron_user_role_manipulate'))
             ->enableEditButton(true)
-            ->setEditBtnUri($this->router->generate('neutron_user_role_manipulate', array('id' => '{{ rowId }}'), true))
+            ->setEditBtnUri($this->router->generate('neutron_user_role_manipulate', array('id' => '{id}'), true))
             ->enableDeleteButton(true)
-            ->setDeleteBtnUri($this->router->generate('neutron_user_role_delete', array('id' => '{{ rowId }}'), true))
+            ->setDeleteBtnUri($this->router->generate('neutron_user_role_delete', array('id' => '{id}'), true))
             ->setQueryHints(array(
                 Query::HINT_CUSTOM_OUTPUT_WALKER => 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker',
             ))

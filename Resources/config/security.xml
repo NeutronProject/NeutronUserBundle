@@ -8,6 +8,7 @@
     <parameters>
         <parameter key="neutron_user.security.authentication_handler.class">Neutron\UserBundle\Security\AuthenticationHandler</parameter>
         <parameter key="neutron_user.security.interactive_login_listener.class">Neutron\UserBundle\Security\InteractiveLoginListener</parameter>      
+        <parameter key="neutron_user.security.on_access_denied_handler.class">Neutron\UserBundle\Security\OnAccessDeniedHandler</parameter>      
     </parameters>
 
     <services>
@@ -19,6 +20,17 @@
         <service id="neutron_user.security.interactive_login_listener" class="%neutron_user.security.interactive_login_listener.class%">
         	<tag name="kernel.event_listener" event="security.interactive_login" method="onSecurityInteractiveLogin" />
         </service>
+        
+        <service id="neutron_user.security.on_access_denied_handler" class="%neutron_user.security.on_access_denied_handler.class%">
+        	<argument type="service" id="http_kernel" />
+        	<argument type="service" id="router" />
+        	<tag name="kernel.event_listener" event="kernel.exception" priority="10"/>
+        </service> 
+        
+        <!-- <service id="neutron_user.security.on_access_denied_handler" class="%neutron_user.security.on_access_denied_handler.class%">
+        	<argument type="service" id="router" />
+            <tag name="kernel.event_listener" event="security.kernel_response" method="handle" priority="200" />
+        </service>  -->
 
     </services>
   
